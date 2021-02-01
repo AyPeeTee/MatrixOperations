@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class MatrixTest {
 
@@ -63,18 +64,48 @@ public class MatrixTest {
 
     @Test
     public void times() {
+        IMatrix mat = a.times(b);
+        assertEquals(2, mat.getRows());
+        assertEquals(3, mat.getColumns());
+        for (int y = 0; y < mat.getRows(); y++){
+            for (int x = 0; x < mat.getColumns(); x++){
+                assertEquals(2.0, mat.get(y, x), 0.01);
+            }
+        }
     }
 
     @Test
     public void timesScalar() {
+        IMatrix mat = a.times(7);
+        assertEquals(2, mat.getRows());
+        assertEquals(3, mat.getColumns());
+        for (int y = 0; y < mat.getRows(); y++){
+            for (int x = 0; x < mat.getColumns(); x++){
+                assertEquals(7.0, mat.get(y, x), 0.01);
+            }
+        }
     }
 
     @Test
     public void add() {
+        IMatrix mat = b.add(c);
+        double[][] res = {
+                {2, 1, 1},
+                {1, 2, 1},
+                {0, 0, 1}
+        };
+        assertEquals(3, mat.getRows());
+        assertEquals(3, mat.getColumns());
+        for (int y = 0; y < mat.getRows(); y++){
+            for (int x = 0; x < mat.getColumns(); x++){
+                assertEquals(res[y][x], mat.get(y, x), 0.01);
+            }
+        }
     }
 
     @Test
     public void get() {
+        assertEquals(1.0, d.get(0, 0), 0.01);
     }
 
     @Test

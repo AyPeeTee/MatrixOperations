@@ -27,22 +27,42 @@ public class Matrix implements IMatrix {
 
     @Override
     public IMatrix times(IMatrix matrix) {
-        throw new NotImplementedError(); // TODO:
+        double[][] mat = new double[this.getRows()][matrix.getColumns()];
+        for (int y = 0; y < this.getRows(); y++){
+            for (int x = 0; x < matrix.getColumns(); x++){
+                mat[y][x] = 0.0;
+                for (int i = 0; i < this.getColumns(); i++){
+                    mat[y][x] += this.get(y, i) * matrix.get(i, x);
+                }
+            }
+        }
+        return new Matrix(mat);
     }
-
     @Override
     public IMatrix times(Number scalar) {
-        throw new NotImplementedError(); // TODO:
+        double[][] mat = new double[this.getRows()][this.getColumns()];
+        for (int y = 0; y < this.getRows(); y++){
+            for (int x = 0; x < this.getColumns(); x++){
+                mat[y][x] = this.get(y, x) * scalar.doubleValue();
+            }
+        }
+        return new Matrix(mat);
     }
 
     @Override
     public IMatrix add(IMatrix matrix) {
-        throw new NotImplementedError(); // TODO:
+        double[][] mat = new double[this.getRows()][this.getColumns()];
+        for (int y = 0; y < this.getRows(); y++){
+            for (int x = 0; x < this.getColumns(); x++){
+                mat[y][x] = this.get(y, x) + matrix.get(y, x);
+            }
+        }
+        return new Matrix(mat);
     }
 
     @Override
     public double get(int n, int m) {
-        throw new NotImplementedError(); // TODO:
+        return this.rawArray[n][m];
     }
 
     //region Optional
